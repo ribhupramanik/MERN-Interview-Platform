@@ -15,7 +15,7 @@ app.use(cors({origin:ENV.CLIENT_URL, credentials:true}))
 
 app.use("/api/inngest", serve({client:inngest, functions}))
 
-app.get("/", (req, res) => {
+app.get("/books", (req, res) => {
   res.status(200).json({message: "success"})
 })
 
