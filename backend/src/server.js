@@ -2,10 +2,14 @@ import express from "express"
 import { ENV } from "./lib/env.js"
 import path from "path"
 import { connectDB } from "./lib/db.js"
+import cors from "cors"
 
 const app = express()
 
 const __dirname = path.resolve()
+
+app.use(express.json())
+app.use(cors({origin:ENV.CLIENT_URL, credentials:true}))
 
 app.get("/", (req, res) => {
   res.status(200).json({message: "success"})
