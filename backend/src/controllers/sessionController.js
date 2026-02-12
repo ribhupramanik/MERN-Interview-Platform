@@ -55,7 +55,20 @@ export const getActiveSession = async (req, res) => {
   }
 };
 
-export const getMyRecentSessions = async (req, res) => {};
+export const getMyRecentSessions = async (req, res) => {
+  try {
+    const userId = req.user._id
+    const sessions = await Session.find({
+      status:"completed",
+      $or:[{host:userId}, {participant: userId}],
+    }).sort({createdAt:-1}).limit(20)
+
+    res.status(200).json({sessions})
+  } catch (error) {
+    console.log("Error in getMySessions Controller", error.message)
+    res.status(500).json({message: "Internal Server Error"})
+  }
+};
 
 export const getSessionById = async (req, res) => {};
 
