@@ -70,7 +70,21 @@ export const getMyRecentSessions = async (req, res) => {
   }
 };
 
-export const getSessionById = async (req, res) => {};
+export const getSessionById = async (req, res) => {
+  try {
+    const {id} = req.params
+    const session = await Session.findById(id)
+    .populate("host","name email profileImage clerkId")
+    .populate("participant","name email profileImage clerkId")
+
+    if(!session) return res.status(404).json({message:"Seesion not found"})
+
+    res.status(200).json({session})
+  } catch (error) {
+    console.log("Error in getSessionId Controller", error.message)
+    res.status(500).json({message: "internal Server Error"})
+  }
+};
 
 export const joinSession = async (req, res) => {};
 
