@@ -110,4 +110,35 @@ export const joinSession = async (req, res) => {
   }
 };
 
-export const endSession = async (req, res) => {};
+export const endSession = async (req, res) => {
+  try {
+    const {id} = req.params
+    const userId = req.user._id
+    const session = await Session.findById(id)
+
+    if(!session) return res.status(404).json({message:"Session not found"})
+    
+    if(session.host.toString() !== userId.toString()){
+      return res.status(403).json({message:"Only the host can end the session"})
+    }
+
+    if(session=== "completed"){
+      return res.status(400).json({message:"Session is already completed"})
+    }
+
+    session.status = "completed"
+    await session.save()
+
+    const call = streamClient.video.call("default", session.callId)
+    await call.delete({hard:true})
+
+    const channel = chatClient.channel("messaging", session.callId)
+    await channel.delete()
+
+    res.status(200).json({session, message:"Session ended successfully"})
+
+  } catch (error) {
+    console.log("Error in endSession Controller", error.message)
+    res.status(500).json({message:"Internal Server Error"})
+  }
+};
