@@ -86,6 +86,28 @@ export const getSessionById = async (req, res) => {
   }
 };
 
-export const joinSession = async (req, res) => {};
+export const joinSession = async (req, res) => {
+  try {
+    const {id} = req.params
+    const userId = req.user._id
+    const clerkId = req.user.clerkId
+
+    const session = await Session.findById(id)
+
+    if(session.participant) return res.status(404).json({message:"Session is full"})
+
+    session.participant = userId
+    await session.save()
+
+    const channel = chatClient.channel("messaging", session.callId)
+    await channel.addMembers([clerkId])
+
+    res.status(200).json({session})
+
+  } catch (error) {
+    console.log("Error in joinSession controller", error.message)
+    res.status(500).json({message: "Internal Server Error"})
+  }
+};
 
 export const endSession = async (req, res) => {};
