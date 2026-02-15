@@ -8,7 +8,11 @@ function App() {
 
   const {isSignedIn, isLoaded}=  useAuth()
     if (!isLoaded) {
-      return <div>Loading...</div>
+      return (
+      <div className="min-h-screen flex items-center justify-center bg-base-100">
+        <span className="loading loading-spinner loading-xl text-primary"></span>
+      </div>
+    )
     }
   return (
     <>
