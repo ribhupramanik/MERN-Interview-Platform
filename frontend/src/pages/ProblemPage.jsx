@@ -45,21 +45,19 @@ const ProblemPage = () => {
   const triggerConfetti = () => {};
 
   const normalizeOutput = (output) => {
-    // normalize output for comparison (trim whitespace, handle different spacing)
     return output
       .trim()
       .split("\n")
       .map((line) =>
         line
           .trim()
-          // remove spaces after [ and before ]
-          .replace(/\[\s+/g, "[")
-          .replace(/\s+\]/g, "]")
-          // normalize spaces around commas to single space after comma
+          .replace(/\[\s*/g, "[")
+          .replace(/\s*\]/g, "]")
           .replace(/\s*,\s*/g, ","),
       )
       .filter((line) => line.length > 0)
-      .join("\n");
+      .join("\n")
+      .trim();
   };
 
   const checkIfTestsPassed = (actualOutput, expectedOutput) => {
