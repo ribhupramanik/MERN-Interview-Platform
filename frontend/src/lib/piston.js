@@ -1,67 +1,35 @@
-const PISTON_API = "https://emkc.org/api/v2/piston";
-
-const LANGUAGE_VERSIONS = {
-  javascript: { language: "javascript", version: "18.15.0" },
-  python: { language: "python", version: "33.10.0" },
-  java: { language: "java", version: "15.0.2" },
-};
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function executeCode(language, code) {
   try {
-    const languageConfig = LANGUAGE_VERSIONS[language];
-    if (!languageConfig) {
-      return {
-        success: false,
-        error: `Unsupported language: ${language}`,
-      };
-    }
-    const response = await fetch(`${PISTON_API}/execute`, {
+    const response = await fetch(`${API_URL}/execute/run`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        language: languageConfig.language,
-        version: languageConfig.version,
-        files: [
-          {
-            name: `main.$${getFileExtention(language)}`,
-            content: code,
-          },
-        ],
+        language,
+        code,
       }),
     });
-    if (!response.ok) {
+
+    const data = await response.json();
+
+    if (!data.success) {
       return {
         success: false,
-        error: `HTTP error! status: ${response.status}`,
+        error: data.error || data.stderr,
       };
-    }
-    const data = await response.json();
-    const output = data.run.output || "";
-    const stderr = data.run.stderr || "";
-
-    if (stderr) {
-      return { success: false, output: output, error: stderr };
     }
 
     return {
       success: true,
-      output: output || "No output",
+      output: data.output || "No output",
     };
   } catch (error) {
-    return{
-      success:false,
-      error: `Failed to execute code: ${error.message}`,
-    }
+    return {
+      success: false,
+      error: error.message,
+    };
   }
-}
-
-function getFileExtention(language) {
-  const extensions = {
-    javascript: "js",
-    python: "py",
-    java: "java",
-  };
-  return extensions[language] || "txt";
 }
