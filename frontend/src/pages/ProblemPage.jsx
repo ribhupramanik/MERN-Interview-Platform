@@ -47,7 +47,12 @@ const ProblemPage = () => {
         <PanelGroup direction="horizontal">
         {/* Left */}
          <Panel defaultSize={40} minSize={30}>
-              <ProblemDescription/>
+              <ProblemDescription
+                problem={currentProblem}
+                currentProblemId={currentProblemId}
+                onProblemChange={handleProblemChange}
+                allProblems={Object.values(PROBLEMS)}
+              />
          </Panel>
 
          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize"/>
