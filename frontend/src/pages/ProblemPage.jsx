@@ -28,7 +28,12 @@ const ProblemPage = () => {
     }
   }, [id,selectedLanguage])
 
-  const handleLanguageChange = (e) => {}
+  const handleLanguageChange = (e) => {
+    const newLang = e.target.value
+    setSelectedLanguage(newLang)
+    setCode(currentProblem.starterCode[newLang])
+    setOutput(null)
+  }
 
   const handleProblemChange = (newProblemId) => navigate(`/problem/${newProblemId}`)
 
@@ -55,13 +60,21 @@ const ProblemPage = () => {
               />
          </Panel>
 
-         <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize"/>
-          {/* Right */}
-         <Panel defaultSize={60} minSize={30}>
-           <PanelGroup direction="vertical">
-            {/* Code editor */}
+          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+
+          {/* right panel- code editor & output */}
+          <Panel defaultSize={60} minSize={30}>
+            <PanelGroup direction="vertical">
+              {/* Top panel - Code editor */}
               <Panel defaultSize={70} minSize={30}>
-                <CodeEditorPanel />
+                <CodeEditorPanel
+                  selectedLanguage={selectedLanguage}
+                  code={code}
+                  isRunning={isRunning}
+                  onLanguageChange={handleLanguageChange}
+                  onCodeChange={setCode}
+                  onRunCode={handleRunCode}
+                />
               </Panel>
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize"/>
             {/* Output Pannel */}

@@ -23,7 +23,7 @@ const CodeEditorPanel = ({
           <select
             className="select select-sm"
             value={selectedLanguage}
-            onchange={onLanguageChange}
+            onChange={onLanguageChange}
           >
             {Object.entries(LANGUAGE_CONFIG).map(([key, lang]) => (
               <option key={key} value={key}>
@@ -55,7 +55,7 @@ const CodeEditorPanel = ({
           onChange={onCodeChange}
           theme="vs-dark"
           options={{
-            fontSize:14,
+            fontSize:18,
             lineNumbers:"on",
             scrollBeyondLastLine:false,
             automaticLayout:true,
