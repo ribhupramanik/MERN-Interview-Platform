@@ -9,6 +9,7 @@ import OutputPanel from "../components/OutputPanel";
 import CodeEditorPanel from "../components/CodeEditorPanel";
 import { executeCode } from "../lib/piston";
 import toast from "react-hot-toast";
+import confetti from "canvas-confetti";
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -42,22 +43,38 @@ const ProblemPage = () => {
   const handleProblemChange = (newProblemId) =>
     navigate(`/problem/${newProblemId}`);
 
-  const triggerConfetti = () => {};
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 80,
+      spread: 250,
+      origin: { x: 0.2, y: 0.6 },
+    });
+
+    confetti({
+      particleCount: 80,
+      spread: 250,
+      origin: { x: 0.8, y: 0.6 },
+    });
+  };
 
   const normalizeOutput = (output) => {
-    return output
-      .trim()
-      .split("\n")
-      .map((line) =>
-        line
-          .trim()
-          .replace(/\[\s*/g, "[")
-          .replace(/\s*\]/g, "]")
-          .replace(/\s*,\s*/g, ","),
-      )
-      .filter((line) => line.length > 0)
-      .join("\n")
-      .trim();
+    try {
+      return output
+        .trim()
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(
+          (line) =>
+            line.startsWith("[") ||
+            line === "true" ||
+            line === "false" ||
+            !isNaN(line),
+        )
+        .map((line) => JSON.stringify(eval(line)))
+        .join("\n");
+    } catch {
+      return output.trim();
+    }
   };
 
   const checkIfTestsPassed = (actualOutput, expectedOutput) => {
@@ -80,10 +97,13 @@ const ProblemPage = () => {
       const expectedOutput = currentProblem.expectedOutput[selectedLanguage];
       const testPassed = checkIfTestsPassed(result.output, expectedOutput);
       if (testPassed) {
+        triggerConfetti();
         toast.success("All tests passed!");
       } else {
         toast.error("Tests failed. Check your output");
       }
+    } else {
+      toast.error("Code execution failed");
     }
   };
 
@@ -122,7 +142,7 @@ const ProblemPage = () => {
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
               {/* Output Pannel */}
               <Panel defaultSize={30} minSize={30}>
-                <OutputPanel />
+                <OutputPanel output={output} />
               </Panel>
             </PanelGroup>
           </Panel>

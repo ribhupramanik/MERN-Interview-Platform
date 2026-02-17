@@ -1,4 +1,6 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
@@ -37,6 +39,7 @@ router.post("/run", async (req, res) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-API-Key": process.env.ONECOMPILER_API_KEY, 
         },
         body: JSON.stringify({
           language: lang,
@@ -52,10 +55,20 @@ router.post("/run", async (req, res) => {
 
     const data = await response.json();
 
+    console.log("ONECOMPILER RESPONSE:", data);
+
+    if (data.stderr) {
+      return res.json({
+        success: false,
+        error: data.stderr,
+      });
+    }
+
+    const output = data.stdout || data.output || "";
+
     return res.json({
       success: true,
-      output: data.stdout,
-      stderr: data.stderr,
+      output,
     });
   } catch (err) {
     console.error("EXEC ERROR:", err);
