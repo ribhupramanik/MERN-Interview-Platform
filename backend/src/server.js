@@ -33,11 +33,8 @@ if (ENV.NODE_ENV === "production") {
 
   app.use(express.static(frontendPath));
 
-  // SPA fallback ONLY for non-API routes
-  app.get("*", (req, res) => {
-    if (req.originalUrl.startsWith("/api")) {
-      return res.status(404).json({ error: "API route not found" });
-    }
+  // SPA fallback for non-API routes
+  app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
