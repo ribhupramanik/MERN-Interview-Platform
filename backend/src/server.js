@@ -28,11 +28,18 @@ app.get("/books", (req, res) => {
   res.status(200).json({message: "success"})
 })
 
-if(ENV.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname,"../frontend/dist")))
-  app.get("/{*any}", (req,res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
-  })
+if (ENV.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+
+  app.use(express.static(frontendPath));
+
+  // SPA fallback ONLY for non-API routes
+  app.get("*", (req, res) => {
+    if (req.originalUrl.startsWith("/api")) {
+      return res.status(404).json({ error: "API route not found" });
+    }
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
 }
 
 const startServer = async() => {
