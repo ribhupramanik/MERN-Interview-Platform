@@ -57,7 +57,10 @@ const DashboardPage = () => {
 
         <div className="conatainer mx-auto px-6 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <StatCards />
+            <StatCards 
+              activeSessionsCount = {activeSessions.length}
+              recentSessionsCount = {recentSessions.length}
+            />
             <ActiveSessions />
           </div>
 
