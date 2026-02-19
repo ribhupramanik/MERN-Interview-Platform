@@ -1,17 +1,13 @@
 import {
-  SignInButton,
-  SignOutButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useAuth,
+  useAuth
 } from "@clerk/clerk-react";
-import { Routes, Route, Navigate } from "react-router";
 import { Toaster } from "react-hot-toast";
-import HomePage from "./pages/HomePage";
-import ProblemsPage from "./pages/ProblemsPage";
+import { Navigate, Route, Routes } from "react-router";
 import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/HomePage";
 import ProblemPage from "./pages/ProblemPage";
+import ProblemsPage from "./pages/ProblemsPage";
+import SessionPage from "./pages/SessionPage";
 
 function App() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -40,6 +36,10 @@ function App() {
         <Route
           path="/problem/:id"
           element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/session/:id"
+          element={isSignedIn ? <SessionPage /> : <Navigate to={"/"} />}
         />
       </Routes>
       <Toaster />
