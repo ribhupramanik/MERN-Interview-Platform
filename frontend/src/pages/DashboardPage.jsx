@@ -35,7 +35,7 @@ const DashboardPage = () => {
       {
         onSuccess: (data) => {
           setShowCreateModel(false);
-          navigate(`/session${data.session._id}`);
+          navigate(`/session/${data.session._id}`);
         },
       },
     );

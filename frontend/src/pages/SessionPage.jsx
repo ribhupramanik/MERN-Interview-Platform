@@ -44,6 +44,7 @@ function SessionPage() {
     : null;
 
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+  const [isCodeInitialized, setIsCodeInitialized] = useState(false);
   const [code, setCode] = useState(problemData?.starterCode?.[selectedLanguage] || "");
 
   // auto-join session if user is not already a participant and not the host
@@ -65,17 +66,19 @@ function SessionPage() {
 
   // update code when problem loads or changes
   useEffect(() => {
-    if (problemData?.starterCode?.[selectedLanguage]) {
+    if (
+      problemData?.starterCode?.[selectedLanguage] &&
+      !isCodeInitialized
+    ) {
       setCode(problemData.starterCode[selectedLanguage]);
+      setIsCodeInitialized(true);
     }
-  }, [problemData, selectedLanguage]);
+  }, [problemData, selectedLanguage, isCodeInitialized]);
 
   const handleLanguageChange = (e) => {
     const newLang = e.target.value;
     setSelectedLanguage(newLang);
-    // use problem-specific starter code
-    const starterCode = problemData?.starterCode?.[newLang] || "";
-    setCode(starterCode);
+    setIsCodeInitialized(false);
     setOutput(null);
   };
 
