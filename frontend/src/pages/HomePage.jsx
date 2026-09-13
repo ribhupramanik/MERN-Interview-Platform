@@ -4,8 +4,8 @@ import { ArrowRightIcon,CheckIcon,Code2Icon,SparklesIcon,UsersIcon,VideoIcon,Zap
 import {SignInButton} from "@clerk/clerk-react"
 const HomePage = () => {
   return (
-    <div className="bg-gradiant-to-br from-base-100 via-base-200 to-base-200">
-      <nav className="bg-basse-100/80 backdrop-blur-md border-b border-primary/20 sticky top-0 z-50 shadow-lg">
+    <div className="bg-gradient-to-br from-base-100 via-base-200 to-base-200">
+      <nav className="bg-base-100/80 backdrop-blur-md border-b border-primary/20 sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto p-4 flex items-center justify-between">
           <Link to={'/'} 
           className="flex items-center gap-3 hover:scale-105 transition--transform duration-20">
@@ -19,15 +19,15 @@ const HomePage = () => {
               <span className="text-xs text-base-content/60 font-medium -mt-1">Code Together</span>
             </div>
           </Link>
-          <SignInButton mode="model">
-            <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
+          <SignInButton mode="modal">
+            <button className="group px-3 sm:px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
               <span>Get Started</span>
               <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </SignInButton>
         </div>
       </nav>
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-16 lg:py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* LEFT CONTENT */}
             <div className="space-y-8">
@@ -36,7 +36,7 @@ const HomePage = () => {
                 Real-time Collaboration
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-black leading-tight">
+              <h1 className="text-4xl sm:text-5xl xl:text-7xl font-black leading-tight">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                   Code Together,
                 </span>
@@ -81,7 +81,7 @@ const HomePage = () => {
               </div>
 
               {/* STATS */}
-              <div className="stats stats-vertical lg:stats-horizontal bg-base-100 shadow-lg">
+              <div className="stats stats-vertical sm:stats-horizontal w-full bg-base-100 shadow-lg">
                 <div className="stat">
                   <div className="stat-value text-primary">10K+</div>
                   <div className="stat-title">Active Users</div>
@@ -107,9 +107,9 @@ const HomePage = () => {
         </div>
 
         {/* FEATURES SECTION */}
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-16 lg:py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Everything You Need to <span className="text-primary font-mono">Succeed</span>
             </h2>
             <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
@@ -118,7 +118,7 @@ const HomePage = () => {
           </div>
 
           {/* FEATURES GRID */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {/* Feature 1 */}
             <div className="card bg-base-100 shadow-xl">
               <div className="card-body items-center text-center">

@@ -8,11 +8,11 @@ const ProblemDescription = ({
   allProblems,
 }) => {
   return (
-    <div className="h-full overflow-y-auto bg-base-200">
+    <div className="problem-description h-full min-w-0 overflow-y-auto bg-base-200">
       {/* HEADER SECTION */}
-      <div className="p-6 bg-base-100 border-b border-base-300">
-        <div className="flex items-start justify-between mb-3">
-          <h1 className="text-3xl font-bold text-base-content">
+      <div className="p-4 sm:p-6 bg-base-100 border-b border-base-300">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+          <h1 className="text-2xl sm:text-3xl font-bold text-base-content">
             {problem.title}
           </h1>
           <span
@@ -39,9 +39,9 @@ const ProblemDescription = ({
         </div>
       </div>
 
-      <div className="p-6 space-y-6">
+      <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
         {/* PROBLEM DESC */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+        <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
           <h2 className="text-xl font-bold text-base-content">Description</h2>
 
           <div className="space-y-3 text-base leading-relaxed">
@@ -55,7 +55,7 @@ const ProblemDescription = ({
         </div>
 
         {/* EXAMPLES SECTION */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+        <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
           <h2 className="text-xl font-bold mb-4 text-base-content">Examples</h2>
           <div className="space-y-4">
             {problem.examples.map((example, idx) => (
@@ -94,7 +94,7 @@ const ProblemDescription = ({
         </div>
 
         {/* CONSTRAINTS */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+        <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
           <h2 className="text-xl font-bold mb-4 text-base-content">
             Constraints
           </h2>

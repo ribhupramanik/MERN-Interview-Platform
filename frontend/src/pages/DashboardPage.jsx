@@ -60,7 +60,7 @@ const DashboardPage = () => {
         />
         {/* Grid Layout */}
 
-        <div className="conatainer mx-auto px-6 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <StatCards 
               activeSessionsCount = {activeSessions.length}

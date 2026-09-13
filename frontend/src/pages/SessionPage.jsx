@@ -99,22 +99,22 @@ function SessionPage() {
   };
 
   return (
-    <div className="h-screen bg-base-100 flex flex-col">
+    <div className="workspace h-dvh bg-base-100 flex flex-col">
       <Navbar />
 
-      <div className="flex-1">
-        <PanelGroup direction="horizontal">
+      <div className="workspace-body flex-1 min-h-0 min-w-0">
+        <PanelGroup direction="horizontal" className="workspace-columns">
           {/* LEFT PANEL - CODE EDITOR & PROBLEM DETAILS */}
-          <Panel defaultSize={50} minSize={30}>
-            <PanelGroup direction="vertical">
+          <Panel className="workspace-column" defaultSize={50} minSize={30}>
+            <PanelGroup direction="vertical" className="workspace-stack">
               {/* PROBLEM DSC PANEL */}
-              <Panel defaultSize={50} minSize={20}>
-                <div className="h-full overflow-y-auto bg-base-200">
+              <Panel className="workspace-section" defaultSize={50} minSize={20}>
+                <div className="problem-description h-full min-w-0 overflow-y-auto bg-base-200">
                   {/* HEADER SECTION */}
-                  <div className="p-6 bg-base-100 border-b border-base-300">
-                    <div className="flex items-start justify-between mb-3">
+                  <div className="p-4 sm:p-6 bg-base-100 border-b border-base-300">
+                    <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       <div>
-                        <h1 className="text-3xl font-bold text-base-content">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-base-content">
                           {session?.problem || "Loading..."}
                         </h1>
                         {problemData?.category && (
@@ -126,7 +126,7 @@ function SessionPage() {
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
                         <span
                           className={`badge badge-lg ${getDifficultyBadgeClass(
                             session?.difficulty
@@ -156,10 +156,10 @@ function SessionPage() {
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-6">
+                  <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                     {/* problem desc */}
                     {problemData?.description && (
-                      <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+                      <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
                         <h2 className="text-xl font-bold mb-4 text-base-content">Description</h2>
                         <div className="space-y-3 text-base leading-relaxed">
                           <p className="text-base-content/90">{problemData.description.text}</p>
@@ -174,7 +174,7 @@ function SessionPage() {
 
                     {/* examples section */}
                     {problemData?.examples && problemData.examples.length > 0 && (
-                      <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+                      <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
                         <h2 className="text-xl font-bold mb-4 text-base-content">Examples</h2>
 
                         <div className="space-y-4">
@@ -214,7 +214,7 @@ function SessionPage() {
 
                     {/* Constraints */}
                     {problemData?.constraints && problemData.constraints.length > 0 && (
-                      <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+                      <div className="bg-base-100 rounded-xl shadow-sm p-3 sm:p-5 border border-base-300">
                         <h2 className="text-xl font-bold mb-4 text-base-content">Constraints</h2>
                         <ul className="space-y-2 text-base-content/90">
                           {problemData.constraints.map((constraint, idx) => (
@@ -230,11 +230,11 @@ function SessionPage() {
                 </div>
               </Panel>
 
-              <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <PanelResizeHandle className="workspace-resize h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
-              <Panel defaultSize={50} minSize={20}>
-                <PanelGroup direction="vertical">
-                  <Panel defaultSize={70} minSize={30}>
+              <Panel className="workspace-section" defaultSize={50} minSize={20}>
+                <PanelGroup direction="vertical" className="workspace-stack">
+                  <Panel className="workspace-editor" defaultSize={70} minSize={30}>
                     <CodeEditorPanel
                       selectedLanguage={selectedLanguage}
                       code={code}
@@ -245,9 +245,9 @@ function SessionPage() {
                     />
                   </Panel>
 
-                  <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+                  <PanelResizeHandle className="workspace-resize h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
-                  <Panel defaultSize={30} minSize={15}>
+                  <Panel className="workspace-output" defaultSize={30} minSize={15}>
                     <OutputPanel output={output} />
                   </Panel>
                 </PanelGroup>
@@ -255,11 +255,11 @@ function SessionPage() {
             </PanelGroup>
           </Panel>
 
-          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <PanelResizeHandle className="workspace-resize w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
           {/* RIGHT PANEL - VIDEO CALLS & CHAT */}
-          <Panel defaultSize={50} minSize={30}>
-            <div className="h-full bg-base-200 p-4 overflow-auto">
+          <Panel className="workspace-column" defaultSize={50} minSize={30}>
+            <div className="workspace-call h-full bg-base-200 p-3 sm:p-4 overflow-auto">
               {isInitializingCall ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">

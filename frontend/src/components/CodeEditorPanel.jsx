@@ -12,8 +12,8 @@ const CodeEditorPanel = ({
   onRunCode,
 }) => {
   return (
-    <div className="h-full bg-base-300 flex flex-col">
-      <div className="flex items-center justify-between px-4 py-3 bg-base-100 border-t border-base-300">
+    <div className="h-full min-h-0 min-w-0 bg-base-300 flex flex-col">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 px-3 py-3 bg-base-100 border-t border-base-300">
         <div className="flex items-center gap-3">
           <img
             src={LANGUAGE_CONFIG[selectedLanguage].icon}
@@ -21,7 +21,7 @@ const CodeEditorPanel = ({
             className="size-6"
           />
           <select
-            className="select select-sm"
+            className="select select-sm w-32 sm:w-40" aria-label="Programming language"
             value={selectedLanguage}
             onChange={onLanguageChange}
           >
@@ -47,7 +47,7 @@ const CodeEditorPanel = ({
           )}
         </button>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 min-h-0 min-w-0">
         <Editor
           height={"100%"}
           language={LANGUAGE_CONFIG[selectedLanguage].monacoLang}
@@ -55,7 +55,7 @@ const CodeEditorPanel = ({
           onChange={onCodeChange}
           theme="vs-dark"
           options={{
-            fontSize:18,
+            fontSize:14, wordWrap:"on", lineNumbersMinChars:3, folding:false,
             lineNumbers:"on",
             scrollBeyondLastLine:false,
             automaticLayout:true,

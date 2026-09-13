@@ -108,13 +108,13 @@ const ProblemPage = () => {
   };
 
   return (
-    <div className="h-screen bg-base-100 flex flex-col">
+    <div className="workspace h-dvh bg-base-100 flex flex-col">
       <Navbar />
 
-      <div className="flex-1">
-        <PanelGroup direction="horizontal">
+      <div className="workspace-body flex-1 min-h-0 min-w-0">
+        <PanelGroup direction="horizontal" className="workspace-columns">
           {/* Left */}
-          <Panel defaultSize={40} minSize={30}>
+          <Panel className="workspace-description" defaultSize={40} minSize={30}>
             <ProblemDescription
               problem={currentProblem}
               currentProblemId={currentProblemId}
@@ -123,13 +123,13 @@ const ProblemPage = () => {
             />
           </Panel>
 
-          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <PanelResizeHandle className="workspace-resize w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
           {/* right panel- code editor & output */}
-          <Panel defaultSize={60} minSize={30}>
-            <PanelGroup direction="vertical">
+          <Panel className="workspace-coding" defaultSize={60} minSize={30}>
+            <PanelGroup direction="vertical" className="workspace-stack">
               {/* Top panel - Code editor */}
-              <Panel defaultSize={70} minSize={30}>
+              <Panel className="workspace-editor" defaultSize={70} minSize={30}>
                 <CodeEditorPanel
                   selectedLanguage={selectedLanguage}
                   code={code}
@@ -139,9 +139,9 @@ const ProblemPage = () => {
                   onRunCode={handleRunCode}
                 />
               </Panel>
-              <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <PanelResizeHandle className="workspace-resize h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
               {/* Output Pannel */}
-              <Panel defaultSize={30} minSize={30}>
+              <Panel className="workspace-output" defaultSize={30} minSize={30}>
                 <OutputPanel output={output} />
               </Panel>
             </PanelGroup>

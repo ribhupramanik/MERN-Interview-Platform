@@ -13,15 +13,15 @@ import { getDifficultyBadgeClass } from "../lib/utils";
 function ActiveSessions({ sessions, isLoading, isUserInSession }) {
   return (
     <div className="lg:col-span-2 card bg-base-100 border-2 border-primary/20 hover:border-primary/30 h-full">
-      <div className="card-body">
+      <div className="card-body min-w-0 p-4 sm:p-6">
         {/* HEADERS SECTION */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           {/* TITLE AND ICON */}
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gradient-to-br from-primary to-secondary rounded-xl">
               <ZapIcon className="size-5" />
             </div>
-            <h2 className="text-2xl font-black">Live Sessions</h2>
+            <h2 className="text-xl sm:text-2xl font-black">Live Sessions</h2>
           </div>
 
           <div className="flex items-center gap-2">
@@ -44,16 +44,16 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                 key={session._id}
                 className="card bg-base-200 border-2 border-base-300 hover:border-primary/50"
               >
-                <div className="flex items-center justify-between gap-4 p-5">
+                <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-5">
                   {/* LEFT SIDE */}
-                  <div className="flex items-center gap-4 flex-1">
-                    <div className="relative size-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <div className="flex items-center gap-3 flex-1 min-w-0 basis-full sm:basis-auto">
+                    <div className="relative shrink-0 size-10 sm:size-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                       <Code2Icon className="size-7 text-white" />
                       <div className="absolute -top-1 -right-1 size-4 bg-success rounded-full border-2 border-base-100" />
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
                         <h3 className="font-bold text-lg truncate">
                           {session.problem}
                         </h3>
@@ -67,10 +67,10 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-4 text-sm opacity-80">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm opacity-80">
                         <div className="flex items-center gap-1.5">
                           <CrownIcon className="size-4" />
-                          <span className="font-medium">
+                          <span className="font-medium [overflow-wrap:anywhere]">
                             {session.host?.name}
                           </span>
                         </div>

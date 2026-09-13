@@ -15,8 +15,8 @@ function CreateSessionModal({
 
   return (
     <div className="modal modal-open">
-      <div className="modal-box max-w-2xl">
-        <h3 className="font-bold text-2xl mb-6">Create New Session</h3>
+      <div className="modal-box w-[calc(100%-2rem)] max-w-2xl p-4 sm:p-6">
+        <h3 className="font-bold text-xl sm:text-2xl mb-6">Create New Session</h3>
 
         <div className="space-y-8">
           {/* PROBLEM SELECTION */}

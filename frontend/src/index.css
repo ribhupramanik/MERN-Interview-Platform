@@ -2,3 +2,47 @@
 @plugin "daisyui"{
   themes: all
 }
+
+html, body, #root {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+.workspace > nav { flex-shrink: 0; }
+.problem-description { overflow-wrap: anywhere; }
+.problem-description .badge { flex-shrink: 0; }
+.problem-description .font-mono > .flex { flex-wrap: wrap; }
+.workspace-resize { touch-action: none; }
+.workspace-resize:focus-visible { outline: 2px solid var(--color-primary); }
+.video-call .str-video__call-controls { flex-wrap: wrap; gap: 4px; }
+.stream-chat-dark .str-chat { height: 100%; min-width: 0; }
+.stream-chat-dark .str-chat__container { min-width: 0; }
+
+/* Stack existing panels without remounting the editor or interrupting a call.
+   Explicit heights keep Monaco usable; the document handles page scrolling. */
+@media (max-width: 1199px) {
+  .workspace { height: auto; min-height: 100dvh; }
+  .workspace-body { flex: none; }
+  .workspace .workspace-columns,
+  .workspace .workspace-stack {
+    display: flex;
+    flex-direction: column !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .workspace [data-panel] {
+    flex: none !important;
+    width: 100%;
+    overflow: visible !important;
+  }
+  .workspace .workspace-resize { display: none; }
+  .workspace .problem-description { height: auto; overflow: visible; }
+  .workspace .workspace-editor { height: clamp(360px, 65dvh, 640px); }
+  .workspace .workspace-output { height: 220px; }
+  .workspace .workspace-call { height: clamp(440px, 75dvh, 720px); }
+}
+
+@media (pointer: coarse) {
+  .btn.btn-sm, .select.select-sm { min-height: 44px; }
+  select, textarea, input { font-size: 16px; }
+}
