@@ -1,5 +1,7 @@
 # Talent IQ — Coding Interview Platform
 
+[**Live Demo →**](https://mern-interview-platform-5tf0.onrender.com)
+
 A full-stack MERN application for practicing coding problems and running one-to-one technical interview sessions. Talent IQ brings problem statements, a multi-language editor, code execution, video calls, and chat into one responsive workspace.
 
 **Built with:** React 19 · Node.js · Express 5 · MongoDB · Clerk · Stream · Inngest
